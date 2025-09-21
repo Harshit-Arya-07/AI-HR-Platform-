@@ -1,0 +1,161 @@
+{
+  "folders": [
+    {
+      "name": "🏠 Root",
+      "path": "."
+    },
+    {
+      "name": "🤖 ML Service",
+      "path": "./ml-service"
+    },
+    {
+      "name": "⚙️ Backend",
+      "path": "./backend"
+    },
+    {
+      "name": "🎨 Frontend",
+      "path": "./frontend"
+    },
+    {
+      "name": "🐳 Docker",
+      "path": "./docker"
+    },
+    {
+      "name": "☁️ Infrastructure",
+      "path": "./infra"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "./ml-service/venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/venv": false
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/venv": true
+    },
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "powershell.cwd": "🏠 Root"
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-vscode.vscode-node-debug2",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-docker",
+      "ms-vscode.vscode-json",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🚀 Start All Services",
+        "type": "shell",
+        "command": "powershell",
+        "args": ["-ExecutionPolicy", "Bypass", "-File", "./run-local.ps1"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "🛑 Stop All Services",
+        "type": "shell",
+        "command": "powershell",
+        "args": [
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "./run-local.ps1",
+          "-StopServices"
+        ],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🐳 Start with Docker",
+        "type": "shell",
+        "command": "powershell",
+        "args": [
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "./run-local.ps1",
+          "-UseDocker"
+        ],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      },
+      {
+        "label": "🧪 Run ML Tests",
+        "type": "shell",
+        "command": "python",
+        "args": ["-m", "pytest", "tests/", "-v"],
+        "options": {
+          "cwd": "${workspaceFolder}/ml-service"
+        },
+        "group": "test"
+      },
+      {
+        "label": "🧪 Run Backend Tests",
+        "type": "shell",
+        "command": "npm",
+        "args": ["test"],
+        "options": {
+          "cwd": "${workspaceFolder}/backend"
+        },
+        "group": "test"
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "🐍 Debug ML Service",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/ml-service/app/main.py",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/ml-service",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/ml-service"
+        }
+      },
+      {
+        "name": "📡 Debug Backend",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/backend/src/server.js",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/backend/.env"
+      }
+    ]
+  }
+}
