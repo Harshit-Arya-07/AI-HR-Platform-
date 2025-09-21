@@ -1,0 +1,53 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Logs
+logs/
+**/logs/
+*.log
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+**/.env
+.env.local
+**/.env.local
+
+# Build outputs / coverage
+frontend/build/
+frontend/dist/
+backend/coverage/
+frontend/coverage/
+**/coverage/
+**/dist/
+
+# Python
+ml-service/venv/
+**/venv/
+**/__pycache__/
+**/.pytest_cache/
+*.pyc
+
+# Uploads & data
+backend/uploads/
+mongodb_data/
+redis_data/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker / Nginx certs (local only)
+docker/nginx/certs/
+
+# ML models cache (if any)
+ml-service/models/
+
+# Backend logs
+backend/logs/
